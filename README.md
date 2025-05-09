@@ -45,11 +45,17 @@ Extende `index.html` e apresenta:
 - Um título de boas-vindas.
 - Um parágrafo descritivo.
 - Um botão estilizado que leva para a página de adição de projetos.
+<img width="947" alt="Captura de tela 2025-05-09 081233" src="https://github.com/user-attachments/assets/60d18a88-3138-4661-8a3a-27aaad439285" />
+
+- Na Home page do projeto fiz uma NAV com botões "HOME" "ADICIONAR PROJETO" "LISTAGEM" onde direciona o usuario para as paginas destintas, abaixo coloquei um titulo e um paragrafo para estilizar a tela e ambientar em conjunto d eum botão de "ADICIONAR PROJETO" caso o usuario queira usar o botão para ir a pagina de add projeto
 
 ### `addprojeto.html`
 Extende `index.html` e apresenta:
 - Um formulário para criação de novos projetos.
 - Input para imagem com sistema de arrastar e soltar (`drag and drop`).
+  <img width="950" alt="Captura de tela 2025-05-09 081335" src="https://github.com/user-attachments/assets/ac2e1039-67b1-4c68-b848-f99d784912ee" />
+
+- Na Pagina ADD PROJETO adicionei 2 campos de escrita onde vai o titulo do projeto e a descrição e abaixo um campo de upload de imagem para o usuario add uma imagem ao seus projetos, e no fim da pagina um botão de "ADD TAREFA" que faz o projeto ser adicionado, logo apos o usuario ja é direcionado para pagina LISTAGEM
 
 ### `lista_projetos.html`
 Extende `index.html` e apresenta:
@@ -58,7 +64,9 @@ Extende `index.html` e apresenta:
   - Botões para editar e remover projetos.
   - Lista de tarefas.
   - Opção para adicionar nova tarefa por modal.
+<img width="960" alt="Captura de tela 2025-05-09 081415" src="https://github.com/user-attachments/assets/dfc9bacf-be0c-4206-9311-b37fe8bf0cf8" />
 
+- Na pagina listagem tem a imagem adicionado pelo usario, titulo e descrição do projeto, botão para editar e remover PROJETO. Abaixo fica um campo onde ficam amarzenada as tarefas do projeto, e abaixo do campo um botão de ADD TAREFA, quando a tarefa é adicionada ela aparece no campo junto do seu titulo e descrição, e do lado direito da tarefa um botão de remover a tarefa.
 ---
 
 ## 🎨 Estilização
