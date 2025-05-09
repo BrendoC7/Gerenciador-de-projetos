@@ -1,0 +1,106 @@
+{% extends "index.html" %}
+{% block body %}
+<div class="container">
+  {% for projeto in projects %}
+    <div class="card mb-4">
+      <div class="row g-0">
+        <div class="col-md-3 d-flex align-items-center justify-content-center">
+          <img src="{{ url_for('static', filename='uploads/' + projeto.imagem) }}" class="img-fluid rounded-start" style="width: 240px; height: 240px; object-fit: cover;" alt="{{ projeto.titulo }}">
+        </div>
+        <div class="col-md-9">
+          <div class="card-body">
+            <div class="d-flex gap-2 mb-3">
+              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#editProjectModal{{ projeto.id }}">
+                Editar Projeto
+              </button>
+              <a href="{{ url_for('remover_projeto', projeto_id=projeto.id) }}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja remover este projeto?')">
+                Remover Projeto
+              </a>
+            </div>
+
+            <div class="modal fade" id="editProjectModal{{ projeto.id }}" tabindex="-1" aria-labelledby="editProjectModalLabel{{ projeto.id }}" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form method="POST" action="{{ url_for('editar_projeto', projeto_id=projeto.id) }}" enctype="multipart/form-data">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="editProjectModalLabel{{ projeto.id }}">Editar Projeto</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <label for="titulo" class="form-label">Novo Título</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" value="{{ projeto.titulo }}" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="descricao" class="form-label">Nova Descrição</label>
+                        <textarea class="form-control" id="descricao" name="descricao" rows="3" required>{{ projeto.descricao }}</textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="imagem" class="form-label">Nova Imagem (opcional)</label>
+                        <input class="form-control" type="file" id="imagem" name="imagem">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-success">Salvar Alterações</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <h5 class="card-title">{{ projeto.titulo }}</h5>
+            <p class="card-text">{{ projeto.descricao }}</p>
+
+            <div style="height: 240px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
+              <ul class="list-group list-group-flush">
+                {% for task in projeto.tasks %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                      <strong>{{ task.titulo }}</strong><br>
+                      <small>{{ task.descricao }}</small>
+                    </div>
+                    <a href="{{ url_for('remover_tarefa', task_id=task.id, projeto_id=projeto.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Remover esta tarefa?')">Remover</a>
+                  </li>
+                {% else %}
+                  <li class="list-group-item">Nenhuma tarefa cadastrada.</li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#addTaskModal{{ projeto.id }}">
+              Adicionar Tarefa
+            </button>
+
+            <div class="modal fade" id="addTaskModal{{ projeto.id }}" tabindex="-1" aria-labelledby="addTaskModalLabel{{ projeto.id }}" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form method="POST" action="{{ url_for('add_tarefa', projeto_id=projeto.id) }}">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="addTaskModalLabel{{ projeto.id }}">Nova Tarefa para {{ projeto.titulo }}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="descricao" name="descricao" rows="3" required></textarea>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-success">Salvar Tarefa</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div> 
+{% endblock %}
